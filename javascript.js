@@ -22,25 +22,28 @@ for (let i = 0; i < 250; i++) {
     food.style.top = `${position.y}px`;
     canvas.appendChild(food);
     foods.push(food);
+
+    // Adding random delay factor for food animation
+    food.style.setProperty('--animation-delay-factor', Math.random());
 }
 
 // Move the player cell to follow the mouse
 canvas.addEventListener('mousemove', (event) => {
     const x = event.clientX;
     const y = event.clientY;
-    player.style.left = x + 'px';
-    player.style.top = y + 'px';
+    player.style.left = `${x - player.offsetWidth / 2}px`;  // Centering the player to the cursor
+    player.style.top = `${y - player.offsetHeight / 2}px`;
 
     // Check for eating food
     for (let i = 0; i < foods.length; i++) {
         const food = foods[i];
         if (food) {
-            const foodX = food.offsetLeft;
-            const foodY = food.offsetTop;
+            const foodX = food.offsetLeft + food.offsetWidth / 2;
+            const foodY = food.offsetTop + food.offsetHeight / 2;
             const distance = Math.sqrt(Math.pow(x - foodX, 2) + Math.pow(y - foodY, 2));
 
             // Check collision with food cells
-            if (distance < 20) {
+            if (distance < (player.offsetWidth / 2 + food.offsetWidth / 2)) {
                 canvas.removeChild(food);
                 foods[i] = null;
 
@@ -53,7 +56,6 @@ canvas.addEventListener('mousemove', (event) => {
     }
 });
 
-// Keeping the existing copyToClipboard function
 function copyToClipboard() {
     const ipBox = document.getElementById("serverIp");
     ipBox.select();
@@ -62,15 +64,11 @@ function copyToClipboard() {
 }
 
 document.getElementById('startGame').addEventListener('click', function(event) {
-    event.preventDefault(); // prevent default behavior for anchor tag
-    
-    // Hide server logo, IP box, instruction, start button, and discord button
+    event.preventDefault();
+
     document.querySelector('.container .server-logo').style.display = 'none';
     document.querySelector('.container .ip-box').style.display = 'none';
     document.querySelector('.container .instruction').style.display = 'none';
     document.getElementById('startGame').style.display = 'none';
     document.querySelectorAll('.container .discord-button').forEach(btn => btn.style.display = 'none');
-
-
-    // Additional logic can be added here if needed.
 });
