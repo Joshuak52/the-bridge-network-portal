@@ -1,38 +1,76 @@
 const canvas = document.querySelector('.background');
+
+// Create the player dot
 const player = document.createElement('div');
 player.className = 'player';
+player.style.display = 'none'; // Hide the player dot initially
 canvas.appendChild(player);
 
-const foods = [];
 let mouseX = 0; // Mouse X coordinate
 let mouseY = 0; // Mouse Y coordinate
 
-function initializeGame() {
-    // Generate random positions
-    function randomPosition() {
-        return {
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight
-        };
-    }
-
-    // Create food cells
-    for (let i = 0; i < 250; i++) {
-        const food = document.createElement('div');
-        food.className = 'food';
-        const position = randomPosition();
-        food.style.left = `${position.x}px`;
-        food.style.top = `${position.y}px`;
-        canvas.appendChild(food);
-        foods.push(food);
-    }
+// Generate random positions
+function randomPosition() {
+    return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight
+    };
 }
 
+// Create food cells
+const foods = [];
+for (let i = 0; i < 250; i++) {
+    const food = document.createElement('div');
+    food.className = 'food';
+    const position = randomPosition();
+    food.style.left = `${position.x}px`;
+    food.style.top = `${position.y}px`;
+    canvas.appendChild(food);
+    foods.push(food);
+}
+
+// Create floating orbs
+for (let i = 0; i < 250; i++) {
+    const orb = document.createElement('div');
+    orb.classList.add('orb');
+
+    const xStart = (Math.random() - 0.5) * 100; // Random X start
+    const yStart = (Math.random() - 0.5) * 100; // Random Y start
+    const xEnd = (Math.random() - 0.5) * 100; // Random X end
+    const yEnd = (Math.random() - 0.5) * 100; // Random Y end
+
+    const animationName = `floatOrb${i}`;
+
+    const keyframes = `
+        @keyframes ${animationName} {
+            from {
+                transform: translate(${xStart}px, ${yStart}px);
+            }
+            to {
+                transform: translate(${xEnd}px, ${yEnd}px);
+            }
+        }
+    `;
+
+    const style = document.createElement('style');
+    style.innerHTML = keyframes;
+    document.head.appendChild(style);
+
+    orb.style.left = `${Math.random() * 100}vw`;
+    orb.style.top = `${Math.random() * 100}vh`;
+    orb.style.animation = `${animationName} 5s infinite alternate`;
+    orb.style.animationDelay = `${Math.random() * 5}s`;
+
+    document.body.appendChild(orb);
+}
+
+// Mouse movement handler
 document.addEventListener('mousemove', (event) => {
     mouseX = event.clientX;
     mouseY = event.clientY;
 });
 
+// Player dot animation
 function animate() {
     const currentX = parseFloat(player.style.left || 0);
     const currentY = parseFloat(player.style.top || 0);
@@ -43,8 +81,6 @@ function animate() {
     player.style.left = `${currentX + deltaX * 0.05}px`;
     player.style.top = `${currentY + deltaY * 0.05}px`;
 
-
-    // Check for eating food
     for (let i = 0; i < foods.length; i++) {
         const food = foods[i];
         if (food) {
@@ -69,13 +105,7 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-function copyToClipboard() {
-    const ipBox = document.getElementById("serverIp");
-    ipBox.select();
-    document.execCommand("copy");
-    alert("Server IP copied to clipboard!");
-}
-
+// Start game button logic
 document.getElementById('startGame').addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -85,7 +115,14 @@ document.getElementById('startGame').addEventListener('click', function(event) {
     document.getElementById('startGame').style.display = 'none';
     document.querySelectorAll('.container .discord-button').forEach(btn => btn.style.display = 'none');
 
-    // Initialize the game and start the animate function when the "Start Game" button is clicked
-    initializeGame();
-    requestAnimationFrame(animate);
+    player.style.display = 'block';  // Show the player dot when the game starts
+
+    requestAnimationFrame(animate);  // Start the player dot animation when the game begins
 });
+
+function copyToClipboard() {
+    const ipBox = document.getElementById("serverIp");
+    ipBox.select();
+    document.execCommand("copy");
+    alert("Server IP copied to clipboard!");
+}
