@@ -4,6 +4,8 @@ player.className = 'player';
 canvas.appendChild(player);
 
 const foods = [];
+let mouseX = 0; // Mouse X coordinate
+let mouseY = 0; // Mouse Y coordinate
 
 // Generate random positions
 function randomPosition() {
@@ -27,12 +29,20 @@ for (let i = 0; i < 250; i++) {
     food.style.setProperty('--animation-delay-factor', Math.random());
 }
 
-// Move the player cell to follow the mouse
 document.addEventListener('mousemove', (event) => {
-    const x = event.clientX;
-    const y = event.clientY;
-    player.style.left = `${x - player.offsetWidth / 2}px`;  // Centering the player to the cursor
-    player.style.top = `${y - player.offsetHeight / 2}px`;
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+});
+
+function animate() {
+    const currentX = parseFloat(player.style.left || 0);
+    const currentY = parseFloat(player.style.top || 0);
+
+    const deltaX = mouseX - currentX;
+    const deltaY = mouseY - currentY;
+
+    player.style.left = `${currentX + deltaX * 0.1}px`;
+    player.style.top = `${currentY + deltaY * 0.1}px`;
 
     // Check for eating food
     for (let i = 0; i < foods.length; i++) {
@@ -40,7 +50,7 @@ document.addEventListener('mousemove', (event) => {
         if (food) {
             const foodX = food.offsetLeft + food.offsetWidth / 2;
             const foodY = food.offsetTop + food.offsetHeight / 2;
-            const distance = Math.sqrt(Math.pow(x - foodX, 2) + Math.pow(y - foodY, 2));
+            const distance = Math.sqrt(Math.pow(mouseX - foodX, 2) + Math.pow(mouseY - foodY, 2));
 
             // Check collision with food cells
             if (distance < (player.offsetWidth / 2 + food.offsetWidth / 2)) {
@@ -54,7 +64,11 @@ document.addEventListener('mousemove', (event) => {
             }
         }
     }
-});
+
+    requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
 
 function copyToClipboard() {
     const ipBox = document.getElementById("serverIp");
