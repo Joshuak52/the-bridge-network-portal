@@ -28,7 +28,7 @@ for (let i = 0; i < 250; i++) {
 }
 
 // Move the player cell to follow the mouse
-canvas.addEventListener('mousemove', (event) => {
+document.addEventListener('mousemove', (event) => {
     const x = event.clientX;
     const y = event.clientY;
     player.style.left = `${x - player.offsetWidth / 2}px`;  // Centering the player to the cursor
