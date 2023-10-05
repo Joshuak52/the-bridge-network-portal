@@ -65,11 +65,12 @@ document.getElementById('startGame').addEventListener('click', function(event) {
     event.preventDefault(); // prevent default behavior for anchor tag
     
     // Hide server logo, IP box, instruction, start button, and discord button
-    document.querySelector('.server-logo').style.display = 'none';
-    document.querySelector('.ip-box').style.display = 'none';
-    document.querySelector('.instruction').style.display = 'none';
-    document.querySelector('.start-button').style.display = 'none';
-    document.querySelector('.discord-button').style.display = 'none';
+    document.querySelector('.container .server-logo').style.display = 'none';
+    document.querySelector('.container .ip-box').style.display = 'none';
+    document.querySelector('.container .instruction').style.display = 'none';
+    document.getElementById('startGame').style.display = 'none';
+    document.querySelectorAll('.container .discord-button').forEach(btn => btn.style.display = 'none');
+
 
     // Additional logic can be added here if needed.
 });
