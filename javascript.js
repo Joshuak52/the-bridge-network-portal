@@ -60,3 +60,16 @@ function copyToClipboard() {
     document.execCommand("copy");
     alert("Server IP copied to clipboard!");
 }
+
+document.getElementById('startGame').addEventListener('click', function(event) {
+    event.preventDefault(); // prevent default behavior for anchor tag
+    
+    // Hide server logo, IP box, instruction, start button, and discord button
+    document.querySelector('.server-logo').style.display = 'none';
+    document.querySelector('.ip-box').style.display = 'none';
+    document.querySelector('.instruction').style.display = 'none';
+    document.querySelector('.start-button').style.display = 'none';
+    document.querySelector('.discord-button').style.display = 'none';
+
+    // Additional logic can be added here if needed.
+});
