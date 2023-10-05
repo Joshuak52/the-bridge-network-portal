@@ -1,13 +1,16 @@
 const canvas = document.querySelector('.background');
 
-// Create the player dot
+// Create the player dot and set its initial position to the center
 const player = document.createElement('div');
 player.className = 'player';
 player.style.display = 'none'; // Hide the player dot initially
+player.style.left = '50%';
+player.style.top = '50%';
+player.style.transform = 'translate(-50%, -50%)'; // Adjust for the size of the player dot to ensure centering
 canvas.appendChild(player);
 
-let mouseX = 0; // Mouse X coordinate
-let mouseY = 0; // Mouse Y coordinate
+let mouseX = window.innerWidth / 2; // Initialize Mouse X coordinate to center
+let mouseY = window.innerHeight / 2; // Initialize Mouse Y coordinate to center
 
 // Generate random positions
 function randomPosition() {
@@ -78,8 +81,8 @@ function animate() {
     const deltaX = mouseX - currentX;
     const deltaY = mouseY - currentY;
 
-    player.style.left = `${currentX + deltaX * 0.0075}px`;
-    player.style.top = `${currentY + deltaY * 0.0075}px`;
+    player.style.left = `${currentX + deltaX * 0.0025}px`;
+    player.style.top = `${currentY + deltaY * 0.0025}px`;
 
     for (let i = 0; i < foods.length; i++) {
         const food = foods[i];
@@ -121,7 +124,7 @@ document.getElementById('startGame').addEventListener('click', function(event) {
 });
 
 function copyToClipboard() {
-    const ipBox = document.getElementById("serverIp");
+        const ipBox = document.getElementById("serverIp");
     ipBox.select();
     document.execCommand("copy");
     alert("Server IP copied to clipboard!");
