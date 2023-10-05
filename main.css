@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     overflow: hidden;
     position: relative;
-    font-size: 135%; /* Increase font size by 35% */
+    font-size: 185%; /* Further increased font size */
 }
 
 .background {
@@ -29,8 +29,9 @@ body {
 }
 
 .server-logo {
-    width: 405px; /* Increase size by 35% */
-    margin-bottom: 27px; /* Increase margin by 35% */
+    width: 60vw; /* Adjusted to viewport width */
+    max-width: 600px; /* Just in case the logo shouldn't get too large */
+    margin-bottom: 40px;
 }
 
 .ip-box {
@@ -38,47 +39,47 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 27px; /* Increase margin by 35% */
+    margin-top: 40px;
 }
 
 .ip-box span {
-    margin-right: 13.5px; /* Increase margin by 35% */
+    margin-right: 20px;
     text-align: center;
 }
 
 .ip-box input {
     text-align: center;
-    padding: 13.5px; /* Increase padding by 35% */
+    padding: 20px;
     border: none;
-    border-radius: 6.75px; /* Increase border-radius by 35% */
+    border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     cursor: pointer;
 }
 
 .instruction {
-    font-size: 16.2px; /* Increase font size by 35% */
+    font-size: 24px; /* Increased font size */
     color: #aaa;
-    margin-bottom: 6.75px; /* Increase margin by 35% */
+    margin-bottom: 10px;
 }
 
 .dot {
     position: absolute;
     background-color: #ff4136;
     border-radius: 50%;
-    width: 2.7px; /* Increase size by 35% */
-    height: 2.7px; /* Increase size by 35% */
-    top: calc(50% - 1.35px); /* Adjust centering */
-    left: calc(50% - 1.35px); /* Adjust centering */
+    width: 4px; 
+    height: 4px; 
+    top: calc(50% - 2px); 
+    left: calc(50% - 2px); 
 }
 
 .discord-button {
     display: inline-block;
-    margin-top: 27px; /* Increase margin by 35% */
-    padding: 13.5px 27px; /* Increase padding by 35% */
+    margin-top: 40px;
+    padding: 20px 40px;
     background-color: #7289DA;
     color: #fff;
-    border-radius: 6.75px; /* Increase border-radius by 35% */
+    border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s;
