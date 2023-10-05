@@ -4,10 +4,10 @@ const canvas = document.querySelector('.background');
 const player = document.createElement('div');
 player.className = 'player';
 player.style.display = 'none'; // Hide the player dot initially
-player.style.left = '50%';
-player.style.top = '50%';
-player.style.transform = 'translate(-50%, -50%)'; // Adjust for the size of the player dot to ensure centering
+player.style.left = `${window.innerWidth / 2}px`;
+player.style.top = `${window.innerHeight / 2}px`;
 canvas.appendChild(player);
+
 
 let mouseX = window.innerWidth / 2; // Initialize Mouse X coordinate to center
 let mouseY = window.innerHeight / 2; // Initialize Mouse Y coordinate to center
