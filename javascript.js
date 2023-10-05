@@ -40,8 +40,9 @@ function animate() {
     const deltaX = mouseX - currentX;
     const deltaY = mouseY - currentY;
 
-    player.style.left = `${currentX + deltaX * 0.75}px`;
-    player.style.top = `${currentY + deltaY * 0.75}px`;
+    player.style.left = `${currentX + deltaX * 0.05}px`;
+    player.style.top = `${currentY + deltaY * 0.05}px`;
+
 
     // Check for eating food
     for (let i = 0; i < foods.length; i++) {
