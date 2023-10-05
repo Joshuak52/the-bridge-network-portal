@@ -41,16 +41,19 @@ function animate() {
     const deltaX = mouseX - currentX;
     const deltaY = mouseY - currentY;
 
-    player.style.left = `${currentX + deltaX * 0.02}px`; // Adjusted for 80% slower movement
-    player.style.top = `${currentY + deltaY * 0.02}px`;
+    player.style.left = `${currentX + deltaX * 0.75}px`; // Adjusted for 25% slower movement
+    player.style.top = `${currentY + deltaY * 0.75}px`;
 
     // Check for eating food
     for (let i = 0; i < foods.length; i++) {
         const food = foods[i];
         if (food) {
+            const playerCenterX = parseFloat(player.style.left) + player.offsetWidth / 2;
+            const playerCenterY = parseFloat(player.style.top) + player.offsetHeight / 2;
+
             const foodX = food.offsetLeft + food.offsetWidth / 2;
             const foodY = food.offsetTop + food.offsetHeight / 2;
-            const distance = Math.sqrt(Math.pow(mouseX - foodX, 2) + Math.pow(mouseY - foodY, 2));
+            const distance = Math.sqrt(Math.pow(playerCenterX - foodX, 2) + Math.pow(playerCenterY - foodY, 2));
 
             // Check collision with food cells
             if (distance < (player.offsetWidth / 2 + food.offsetWidth / 2)) {
