@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     overflow: hidden;
     position: relative;
-    font-size: 185%; /* Further increased font size */
+    font-size: 185%;
 }
 
 .background {
@@ -29,8 +29,8 @@ body {
 }
 
 .server-logo {
-    width: 60vw; /* Adjusted to viewport width */
-    max-width: 600px; /* Just in case the logo shouldn't get too large */
+    width: 60vw;
+    max-width: 600px;
     margin-bottom: 10px;
 }
 
@@ -43,15 +43,15 @@ body {
 }
 
 .ip-box span {
-    font-size: 2em; /* Increase the font size of the text */
+    font-size: 2em;
     margin-right: 5px;
     text-align: center;
 }
 
 .ip-box input {
-    font-size: 2em; /* Increase the font size of the input text */
+    font-size: 2em;
     text-align: center;
-    padding: 20px;
+    padding: 10px;  /* Reduced padding */
     border: none;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -60,7 +60,7 @@ body {
 }
 
 .instruction {
-    font-size: 24px; /* Increased font size */
+    font-size: 24px;
     color: #aaa;
     margin-bottom: 10px;
 }
@@ -69,10 +69,10 @@ body {
     position: absolute;
     background-color: #ff4136;
     border-radius: 50%;
-    width: 4px; 
-    height: 4px; 
-    top: calc(50% - 2px); 
-    left: calc(50% - 2px); 
+    width: 4px;
+    height: 4px;
+    top: calc(50% - 2px);
+    left: calc(50% - 2px);
 }
 
 .discord-button {
