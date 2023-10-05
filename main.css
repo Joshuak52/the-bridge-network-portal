@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
     overflow: hidden;
     position: relative;
+    font-size: 135%; /* Increase font size by 35% */
 }
 
 .background {
@@ -12,7 +13,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #1e2a38; /* Dark blue color for the background */
+    background: #1e2a38;
     z-index: -1;
 }
 
@@ -28,57 +29,56 @@ body {
 }
 
 .server-logo {
-    width: 300px;
-    margin-bottom: 20px;
+    width: 405px; /* Increase size by 35% */
+    margin-bottom: 27px; /* Increase margin by 35% */
 }
 
 .ip-box {
     display: flex;
-    flex-direction: column;  /* This ensures child items are stacked vertically */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 27px; /* Increase margin by 35% */
 }
 
-
 .ip-box span {
-    margin-right: 10px;
+    margin-right: 13.5px; /* Increase margin by 35% */
     text-align: center;
 }
 
 .ip-box input {
     text-align: center;
-    padding: 10px;
+    padding: 13.5px; /* Increase padding by 35% */
     border: none;
-    border-radius: 5px;
+    border-radius: 6.75px; /* Increase border-radius by 35% */
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     cursor: pointer;
 }
 
 .instruction {
-    font-size: 12px;
-    color: #aaa;   /* Light gray color */
-    margin-bottom: 5px;
+    font-size: 16.2px; /* Increase font size by 35% */
+    color: #aaa;
+    margin-bottom: 6.75px; /* Increase margin by 35% */
 }
 
 .dot {
     position: absolute;
-    background-color: #ff4136; /* Fire red color for the dots */
+    background-color: #ff4136;
     border-radius: 50%;
-    width: 2px;
-    height: 2px;
-    top: calc(50% - 1px);
-    left: calc(50% - 1px);
+    width: 2.7px; /* Increase size by 35% */
+    height: 2.7px; /* Increase size by 35% */
+    top: calc(50% - 1.35px); /* Adjust centering */
+    left: calc(50% - 1.35px); /* Adjust centering */
 }
 
 .discord-button {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #7289DA; /* Discord's official color */
+    margin-top: 27px; /* Increase margin by 35% */
+    padding: 13.5px 27px; /* Increase padding by 35% */
+    background-color: #7289DA;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 6.75px; /* Increase border-radius by 35% */
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s;
