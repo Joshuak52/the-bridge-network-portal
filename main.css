@@ -51,7 +51,8 @@ body {
 .ip-box input {
     font-size: 2em;
     text-align: center;
-    padding: 10px;  /* Reduced padding */
+    padding: 2px 4px; /* Minimal padding */
+    height: auto; /* Let the input adjust to the content's height */
     border: none;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.5);
