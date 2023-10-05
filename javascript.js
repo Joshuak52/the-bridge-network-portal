@@ -26,7 +26,7 @@ for (let i = 0; i < 250; i++) {
 
     dot.style.left = `${Math.random() * 100}vw`;
     dot.style.top = `${Math.random() * 100}vh`;
-    dot.style.animation = `${animationName} 5s infinite alternate`;
+    dot.style.animation = `${animationName} 2.5s infinite alternate`; // Halved the animation time to 2.5s
     dot.style.animationDelay = `${Math.random() * 5}s`;
 
     document.body.appendChild(dot);
