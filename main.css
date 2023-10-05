@@ -43,11 +43,13 @@ body {
 }
 
 .ip-box span {
+    font-size: 2em; /* Increase the font size of the text */
     margin-right: 20px;
     text-align: center;
 }
 
 .ip-box input {
+    font-size: 2em; /* Increase the font size of the input text */
     text-align: center;
     padding: 20px;
     border: none;
