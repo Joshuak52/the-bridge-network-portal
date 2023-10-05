@@ -78,8 +78,8 @@ function animate() {
     const deltaX = mouseX - currentX;
     const deltaY = mouseY - currentY;
 
-    player.style.left = `${currentX + deltaX * 0.05}px`;
-    player.style.top = `${currentY + deltaY * 0.05}px`;
+    player.style.left = `${currentX + deltaX * 0.02}px`;
+    player.style.top = `${currentY + deltaY * 0.02}px`;
 
     for (let i = 0; i < foods.length; i++) {
         const food = foods[i];
