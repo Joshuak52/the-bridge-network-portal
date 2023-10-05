@@ -51,8 +51,8 @@ body {
 .ip-box input {
     font-size: 2em;
     text-align: center;
-    padding: 2px 4px; /* Minimal padding */
-    height: auto; /* Let the input adjust to the content's height */
+    padding: 2px 4px; 
+    height: auto; 
     border: none;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -66,14 +66,20 @@ body {
     margin-bottom: 10px;
 }
 
-.dot {
+.food {
     position: absolute;
     background-color: #ff4136;
     border-radius: 50%;
-    width: 4px;
-    height: 4px;
-    top: calc(50% - 2px);
-    left: calc(50% - 2px);
+    width: 5px;
+    height: 5px;
+}
+
+.player {
+    position: absolute;
+    background-color: #01FF70;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
 }
 
 .discord-button {
