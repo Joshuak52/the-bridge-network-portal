@@ -17,6 +17,23 @@ body {
     z-index: -1;
 }
 
+.start-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 20px 40px;
+    background-color: #FF851B;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* to provide spacing between Start and Discord buttons */
+}
+
+.start-button:hover {
+    background-color: #E67300;
+}
+
 .container {
     display: flex;
     flex-direction: column;
