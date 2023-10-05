@@ -33,4 +33,30 @@ canvas.addEventListener('mousemove', (event) => {
 
     // Check for eating food
     for (let i = 0; i < foods.length; i++) {
-        const food =
+        const food = foods[i];
+        if (food) {
+            const foodX = food.offsetLeft;
+            const foodY = food.offsetTop;
+            const distance = Math.sqrt(Math.pow(x - foodX, 2) + Math.pow(y - foodY, 2));
+
+            // Check collision with food cells
+            if (distance < 20) {
+                canvas.removeChild(food);
+                foods[i] = null;
+
+                // Increase player size after eating food
+                const newSize = Math.min(player.offsetWidth + 1, window.innerWidth / 5);
+                player.style.width = `${newSize}px`;
+                player.style.height = `${newSize}px`;
+            }
+        }
+    }
+});
+
+// Keeping the existing copyToClipboard function
+function copyToClipboard() {
+    const ipBox = document.getElementById("serverIp");
+    ipBox.select();
+    document.execCommand("copy");
+    alert("Server IP copied to clipboard!");
+}
