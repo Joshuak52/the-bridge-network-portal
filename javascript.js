@@ -1,4 +1,4 @@
-for (let i = 0; i < 150; i++) {
+for (let i = 0; i < 250; i++) {
     const dot = document.createElement('div');
     dot.classList.add('dot');
 
