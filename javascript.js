@@ -1,16 +1,20 @@
 const canvas = document.querySelector('.background');
-
-// Player Dot
 const player = document.createElement('div');
 player.className = 'player';
-player.style.display = 'none'; // Hidden by default
-player.style.left = `${window.innerWidth / 2}px`; // Start at the center
-player.style.top = `${window.innerHeight / 2}px`; 
 canvas.appendChild(player);
 
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
+let playerName = '';
 
+// Position the player in the center initially
+player.style.left = `${window.innerWidth / 2 - 10}px`;
+player.style.top = `${window.innerHeight / 2 - 10}px`;
+
+const foods = [];
+const playerNameDiv = document.querySelector('.player-name');
+const playerScoreDiv = document.querySelector('.player-score');
+let score = 0;
+
+// Generate random positions
 function randomPosition() {
     return {
         x: Math.random() * window.innerWidth,
@@ -19,7 +23,6 @@ function randomPosition() {
 }
 
 // Create food cells
-const foods = [];
 for (let i = 0; i < 250; i++) {
     const food = document.createElement('div');
     food.className = 'food';
@@ -30,33 +33,33 @@ for (let i = 0; i < 250; i++) {
     foods.push(food);
 }
 
-// Mouse Movement
-document.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+let targetX = window.innerWidth / 2;
+let targetY = window.innerHeight / 2;
+
+canvas.addEventListener('mousemove', (event) => {
+    targetX = event.clientX;
+    targetY = event.clientY;
 });
 
 function animate() {
-    const currentX = parseFloat(player.style.left || 0);
-    const currentY = parseFloat(player.style.top || 0);
+    const currentX = parseFloat(player.style.left);
+    const currentY = parseFloat(player.style.top);
 
-    const deltaX = (mouseX - currentX) * 0.2; // 20% movement
-    const deltaY = (mouseY - currentY) * 0.2;
+    const dx = (targetX - currentX) * 0.2;
+    const dy = (targetY - currentY) * 0.2;
 
-    player.style.left = `${currentX + deltaX}px`;
-    player.style.top = `${currentY + deltaY}px`;
+    player.style.left = currentX + dx + 'px';
+    player.style.top = currentY + dy + 'px';
 
-    // Food collision and consumption
+    // Check for eating food
     for (let i = 0; i < foods.length; i++) {
         const food = foods[i];
         if (food) {
-            const playerCenterX = parseFloat(player.style.left) + player.offsetWidth / 2;
-            const playerCenterY = parseFloat(player.style.top) + player.offsetHeight / 2;
+            const foodX = food.offsetLeft;
+            const foodY = food.offsetTop;
+            const distance = Math.sqrt(Math.pow((currentX + dx - foodX), 2) + Math.pow((currentY + dy - foodY), 2));
 
-            const foodX = food.offsetLeft + food.offsetWidth / 2;
-            const foodY = food.offsetTop + food.offsetHeight / 2;
-            const distance = Math.sqrt(Math.pow(playerCenterX - foodX, 2) + Math.pow(playerCenterY - foodY, 2));
-
+            // Check collision with food cells
             if (distance < (player.offsetWidth / 2 + food.offsetWidth / 2)) {
                 canvas.removeChild(food);
                 foods[i] = null;
@@ -64,6 +67,9 @@ function animate() {
                 const newSize = Math.min(player.offsetWidth + 1, window.innerWidth / 5);
                 player.style.width = `${newSize}px`;
                 player.style.height = `${newSize}px`;
+
+                score += 1;  // Update the score
+                playerScoreDiv.textContent = score;  // Reflect the new score on the scoreboard
             }
         }
     }
@@ -71,40 +77,35 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-const usernameModal = document.getElementById('usernameModal');
-const playBtn = document.getElementById('playBtn');
-const cancelBtn = document.getElementById('cancelBtn');
-
-document.getElementById('startGame').addEventListener('click', function(event) {
-    event.preventDefault();
-    usernameModal.style.display = 'block';
-});
-
-playBtn.addEventListener('click', function() {
-    const playerName = document.getElementById('username').value.trim();
-
-    if (playerName) {
-        usernameModal.style.display = 'none';
-        player.style.display = 'block';
-        document.querySelector('.container .server-logo').style.display = 'none';
-        document.querySelector('.container .ip-box').style.display = 'none';
-        document.querySelector('.container .instruction').style.display = 'none';
-        document.getElementById('startGame').style.display = 'none';
-        document.querySelector('.container .discord-button').style.display = 'none';
-
-        requestAnimationFrame(animate);
-    } else {
-        alert('Please enter a valid username.');
-    }
-});
-
-cancelBtn.addEventListener('click', function() {
-    usernameModal.style.display = 'none';
-});
-
 function copyToClipboard() {
     const ipBox = document.getElementById("serverIp");
     ipBox.select();
     document.execCommand("copy");
     alert("Server IP copied to clipboard!");
 }
+
+document.getElementById('startGame').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    const modal = document.getElementById('usernameModal');
+    modal.style.display = "block";
+    
+    // When player clicks Play
+    document.getElementById('playBtn').addEventListener('click', function() {
+        playerName = document.getElementById('username').value || 'Player';
+        playerNameDiv.textContent = playerName;
+
+        modal.style.display = "none";
+        document.querySelector('.server-logo').style.display = 'none';
+        document.querySelector('.ip-box').style.display = 'none';
+        document.querySelector('.start-button').style.display = 'none';
+        document.querySelector('.discord-button').style.display = 'none';
+
+        animate();
+    });
+
+    // When player clicks Cancel
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+        modal.style.display = "none";
+    });
+});
