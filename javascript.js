@@ -88,24 +88,26 @@ document.getElementById('startGame').addEventListener('click', function(event) {
     
     const modal = document.getElementById('usernameModal');
     modal.style.display = "block";
-    
-    // When player clicks Play
-    document.getElementById('playBtn').addEventListener('click', function() {
-        playerName = document.getElementById('username').value || 'Anonymous';
-        playerNameDiv.textContent = playerName;
+});
 
-        modal.style.display = "none";
-        document.querySelector('.server-logo').style.display = 'none';
-        document.querySelector('.ip-box').style.display = 'none';
-        document.querySelector('.start-button').style.display = 'none';
-        document.querySelector('.discord-button').style.display = 'none';
+// When player clicks Play
+document.getElementById('playBtn').addEventListener('click', function() {
+    const modal = document.getElementById('usernameModal');
+    const playerName = document.getElementById('username').value || 'Anonymous';
+    playerNameDiv.textContent = playerName;
 
-        gameStarted = true;
-        animate();
-    });
+    modal.style.display = "none";
+    document.querySelector('.server-logo').style.display = 'none';
+    document.querySelector('.ip-box').style.display = 'none';
+    document.querySelector('.start-button').style.display = 'none';
+    document.querySelector('.discord-button').style.display = 'none';
 
-    // When player clicks Cancel
-    document.getElementById('cancelBtn').addEventListener('click', function() {
-        modal.style.display = "none";
-    });
-};
+    gameStarted = true;
+    animate();
+});
+
+// When player clicks Cancel
+document.getElementById('cancelBtn').addEventListener('click', function() {
+    const modal = document.getElementById('usernameModal');
+    modal.style.display = "none";
+});
