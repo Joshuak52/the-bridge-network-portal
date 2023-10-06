@@ -22,7 +22,7 @@ function randomPosition() {
     };
 }
 
-// Create food cells
+// Create the floating orbs (food cells)
 for (let i = 0; i < 250; i++) {
     const food = document.createElement('div');
     food.className = 'food';
@@ -31,6 +31,25 @@ for (let i = 0; i < 250; i++) {
     food.style.top = `${position.y}px`;
     canvas.appendChild(food);
     foods.push(food);
+    
+    // Floating animation for orbs
+    const xEnd = (Math.random() - 0.5) * 100;
+    const yEnd = (Math.random() - 0.5) * 100;
+    const animationName = `floatOrb${i}`;
+    const keyframes = `
+        @keyframes ${animationName} {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(${xEnd}px, ${yEnd}px);
+            }
+        }
+    `;
+    const style = document.createElement('style');
+    style.innerHTML = keyframes;
+    document.head.appendChild(style);
+    food.style.animation = `${animationName} 2.5s infinite alternate`;
 }
 
 let targetX = window.innerWidth / 2;
@@ -108,4 +127,4 @@ document.getElementById('startGame').addEventListener('click', function(event) {
     document.getElementById('cancelBtn').addEventListener('click', function() {
         modal.style.display = "none";
     });
-});
+};
