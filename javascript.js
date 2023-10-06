@@ -1,79 +1,35 @@
-const canvas = document.querySelector('.background');
-const player = document.createElement('div');
-player.className = 'player';
-canvas.appendChild(player);
-player.style.left = `${window.innerWidth / 2 - 10}px`;
-player.style.top = `${window.innerHeight / 2 - 10}px`;
-
-const foods = [];
-const playerNameDiv = document.querySelector('.player-name');
-const playerScoreDiv = document.querySelector('.player-score');
-let score = 0;
-let gameStarted = false;
-
-// Generate random positions
-function randomPosition() {
-    return {
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight
-    };
-}
-
-// Create the floating orbs (food cells)
 for (let i = 0; i < 250; i++) {
-    const food = document.createElement('div');
-    food.className = 'food';
-    const position = randomPosition();
-    food.style.left = `${position.x}px`;
-    food.style.top = `${position.y}px`;
-    canvas.appendChild(food);
-    foods.push(food);
-}
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
 
-let targetX = window.innerWidth / 2;
-let targetY = window.innerHeight / 2;
+    const xStart = (Math.random() - 0.5) * 100; // Random X start
+    const yStart = (Math.random() - 0.5) * 100; // Random Y start
+    const xEnd = (Math.random() - 0.5) * 100; // Random X end
+    const yEnd = (Math.random() - 0.5) * 100; // Random Y end
 
-canvas.addEventListener('mousemove', (event) => {
-    targetX = event.clientX;
-    targetY = event.clientY;
-});
+    const animationName = `floatDot${i}`;
 
-function animate() {
-    if (!gameStarted) return;
-
-    const currentX = parseFloat(player.style.left);
-    const currentY = parseFloat(player.style.top);
-
-    const dx = (targetX - currentX) * 0.2;
-    const dy = (targetY - currentY) * 0.2;
-
-    player.style.left = currentX + dx + 'px';
-    player.style.top = currentY + dy + 'px';
-
-    // Check for eating food
-    for (let i = 0; i < foods.length; i++) {
-        const food = foods[i];
-        if (food) {
-            const foodX = food.offsetLeft + food.offsetWidth / 2;
-            const foodY = food.offsetTop + food.offsetHeight / 2;
-            const distance = Math.sqrt(Math.pow(currentX + dx - foodX, 2) + Math.pow(currentY + dy - foodY, 2));
-
-            // Check collision with food cells
-            if (distance < (player.offsetWidth / 2 + food.offsetWidth / 2)) {
-                canvas.removeChild(food);
-                foods[i] = null;
-
-                const newSize = Math.min(player.offsetWidth + 1, window.innerWidth / 5);
-                player.style.width = `${newSize}px`;
-                player.style.height = `${newSize}px`;
-
-                score += 1;
-                playerScoreDiv.textContent = score;
+    const keyframes = `
+        @keyframes ${animationName} {
+            from {
+                transform: translate(${xStart}px, ${yStart}px);
+            }
+            to {
+                transform: translate(${xEnd}px, ${yEnd}px);
             }
         }
-    }
+    `;
 
-    requestAnimationFrame(animate);
+    const style = document.createElement('style');
+    style.innerHTML = keyframes;
+    document.head.appendChild(style);
+
+    dot.style.left = `${Math.random() * 100}vw`;
+    dot.style.top = `${Math.random() * 100}vh`;
+    dot.style.animation = `${animationName} 2.5s infinite alternate`; // Halved the animation time to 2.5s
+    dot.style.animationDelay = `${Math.random() * 5}s`;
+
+    document.body.appendChild(dot);
 }
 
 function copyToClipboard() {
@@ -82,32 +38,3 @@ function copyToClipboard() {
     document.execCommand("copy");
     alert("Server IP copied to clipboard!");
 }
-
-document.getElementById('startGame').addEventListener('click', function(event) {
-    event.preventDefault();
-    
-    const modal = document.getElementById('usernameModal');
-    modal.style.display = "block";
-});
-
-// When player clicks Play
-document.getElementById('playBtn').addEventListener('click', function() {
-    const modal = document.getElementById('usernameModal');
-    const playerName = document.getElementById('username').value || 'Anonymous';
-    playerNameDiv.textContent = playerName;
-
-    modal.style.display = "none";
-    document.querySelector('.server-logo').style.display = 'none';
-    document.querySelector('.ip-box').style.display = 'none';
-    document.querySelector('.start-button').style.display = 'none';
-    document.querySelector('.discord-button').style.display = 'none';
-
-    gameStarted = true;
-    animate();
-});
-
-// When player clicks Cancel
-document.getElementById('cancelBtn').addEventListener('click', function() {
-    const modal = document.getElementById('usernameModal');
-    modal.style.display = "none";
-});
