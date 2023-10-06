@@ -1,18 +1,16 @@
 const canvas = document.querySelector('.background');
 
-// Create the player dot and set its initial position to the center
+// Player Dot
 const player = document.createElement('div');
 player.className = 'player';
-player.style.display = 'none'; // Hide the player dot initially
-player.style.left = `${window.innerWidth / 2}px`;
-player.style.top = `${window.innerHeight / 2}px`;
+player.style.display = 'none'; // Hidden by default
+player.style.left = `${window.innerWidth / 2}px`; // Start at the center
+player.style.top = `${window.innerHeight / 2}px`; 
 canvas.appendChild(player);
 
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
 
-let mouseX = window.innerWidth / 2; // Initialize Mouse X coordinate to center
-let mouseY = window.innerHeight / 2; // Initialize Mouse Y coordinate to center
-
-// Generate random positions
 function randomPosition() {
     return {
         x: Math.random() * window.innerWidth,
@@ -32,58 +30,23 @@ for (let i = 0; i < 250; i++) {
     foods.push(food);
 }
 
-// Create floating orbs
-for (let i = 0; i < 250; i++) {
-    const orb = document.createElement('div');
-    orb.classList.add('orb');
-
-    const xStart = (Math.random() - 0.5) * 100; // Random X start
-    const yStart = (Math.random() - 0.5) * 100; // Random Y start
-    const xEnd = (Math.random() - 0.5) * 100; // Random X end
-    const yEnd = (Math.random() - 0.5) * 100; // Random Y end
-
-    const animationName = `floatOrb${i}`;
-
-    const keyframes = `
-        @keyframes ${animationName} {
-            from {
-                transform: translate(${xStart}px, ${yStart}px);
-            }
-            to {
-                transform: translate(${xEnd}px, ${yEnd}px);
-            }
-        }
-    `;
-
-    const style = document.createElement('style');
-    style.innerHTML = keyframes;
-    document.head.appendChild(style);
-
-    orb.style.left = `${Math.random() * 100}vw`;
-    orb.style.top = `${Math.random() * 100}vh`;
-    orb.style.animation = `${animationName} 5s infinite alternate`;
-    orb.style.animationDelay = `${Math.random() * 5}s`;
-
-    document.body.appendChild(orb);
-}
-
-// Mouse movement handler
+// Mouse Movement
 document.addEventListener('mousemove', (event) => {
     mouseX = event.clientX;
     mouseY = event.clientY;
 });
 
-// Player dot animation
 function animate() {
     const currentX = parseFloat(player.style.left || 0);
     const currentY = parseFloat(player.style.top || 0);
 
-    const deltaX = mouseX - currentX;
-    const deltaY = mouseY - currentY;
+    const deltaX = (mouseX - currentX) * 0.2; // 20% movement
+    const deltaY = (mouseY - currentY) * 0.2;
 
-    player.style.left = `${currentX + deltaX * 0.0025}px`;
-    player.style.top = `${currentY + deltaY * 0.0025}px`;
+    player.style.left = `${currentX + deltaX}px`;
+    player.style.top = `${currentY + deltaY}px`;
 
+    // Food collision and consumption
     for (let i = 0; i < foods.length; i++) {
         const food = foods[i];
         if (food) {
@@ -108,23 +71,39 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Start game button logic
+const usernameModal = document.getElementById('usernameModal');
+const playBtn = document.getElementById('playBtn');
+const cancelBtn = document.getElementById('cancelBtn');
+
 document.getElementById('startGame').addEventListener('click', function(event) {
     event.preventDefault();
+    usernameModal.style.display = 'block';
+});
 
-    document.querySelector('.container .server-logo').style.display = 'none';
-    document.querySelector('.container .ip-box').style.display = 'none';
-    document.querySelector('.container .instruction').style.display = 'none';
-    document.getElementById('startGame').style.display = 'none';
-    document.querySelectorAll('.container .discord-button').forEach(btn => btn.style.display = 'none');
+playBtn.addEventListener('click', function() {
+    const playerName = document.getElementById('username').value.trim();
 
-    player.style.display = 'block';  // Show the player dot when the game starts
+    if (playerName) {
+        usernameModal.style.display = 'none';
+        player.style.display = 'block';
+        document.querySelector('.container .server-logo').style.display = 'none';
+        document.querySelector('.container .ip-box').style.display = 'none';
+        document.querySelector('.container .instruction').style.display = 'none';
+        document.getElementById('startGame').style.display = 'none';
+        document.querySelector('.container .discord-button').style.display = 'none';
 
-    requestAnimationFrame(animate);  // Start the player dot animation when the game begins
+        requestAnimationFrame(animate);
+    } else {
+        alert('Please enter a valid username.');
+    }
+});
+
+cancelBtn.addEventListener('click', function() {
+    usernameModal.style.display = 'none';
 });
 
 function copyToClipboard() {
-        const ipBox = document.getElementById("serverIp");
+    const ipBox = document.getElementById("serverIp");
     ipBox.select();
     document.execCommand("copy");
     alert("Server IP copied to clipboard!");
