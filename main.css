@@ -17,6 +17,26 @@ body {
     z-index: -1;
 }
 
+.start-button, .discord-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* to provide spacing between Start and Discord buttons */
+}
+
+.start-button {
+    background-color: #FF851B;
+    color: #fff;
+}
+
+.start-button:hover {
+    background-color: #E67300;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -51,7 +71,7 @@ body {
 .ip-box input {
     font-size: 2em;
     text-align: center;
-    padding: 2px 4px; 
+    padding: 2px 4px;
     height: auto; 
     border: none;
     border-radius: 5px;
@@ -82,26 +102,6 @@ body {
     height: 20px;
 }
 
-.start-button, .discord-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 20px 40px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.start-button {
-    background-color: #FF851B;
-    color: #fff;
-    margin-right: 10px; 
-}
-
-.start-button:hover {
-    background-color: #E67300;
-}
-
 .discord-button {
     background-color: #7289DA;
     color: #fff;
@@ -109,37 +109,6 @@ body {
 
 .discord-button:hover {
     background-color: #586db7;
-}
-
-/* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 3;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%;
-    text-align: center;
-}
-
-.modal-buttons {
-    margin-top: 10px;
-}
-
-button {
-    margin: 0 10px;
-    padding: 10px 15px;
 }
 
 /* Scoreboard styles */
@@ -154,16 +123,76 @@ button {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    max-width: 200px;
 }
 
-.player-name {
-    font-weight: bold;
-    margin-bottom: 5px;
+.player-entry {
+    font-size: 14px;
     color: #333;
+    margin: 2px;
 }
 
 .player-score {
     color: #FF4136;
-    font-size: 2em;
     font-weight: bold;
+    margin-left: 5px;
+}
+
+/* Username modal styles */
+#usernameModal {
+    display: none;
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button.cancel {
+    background-color: #f44336;
+}
+
+button.cancel:hover {
+    background-color: #da190b;
 }
