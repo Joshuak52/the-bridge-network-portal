@@ -1,3 +1,4 @@
+// JavaScript code for creating floating dots
 for (let i = 0; i < 250; i++) {
     const dot = document.createElement('div');
     dot.classList.add('dot');
