@@ -78,10 +78,16 @@ body {
     border-radius: 50%;
     width: 4px;
     height: 4px;
-    top: calc(50% - 2px);
-    left: calc(50% - 2px);
     animation: floatDot 2.5s infinite alternate;
-    animation-delay: calc(var(--delay) * 1s);
+}
+
+@keyframes floatDot {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(50px, 50px);
+    }
 }
 
 .discord-button {
