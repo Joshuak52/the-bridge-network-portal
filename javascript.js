@@ -38,3 +38,26 @@ function copyToClipboard() {
     document.execCommand("copy");
     alert("Server IP copied to clipboard!");
 }
+
+function launchMinecraft() {
+    const ipBox = document.getElementById("serverIp");
+
+    if (isMobile.iOS()) {
+        window.location.href = `minecraftpe:?server=${ipBox.value}`;
+    } else {
+        window.location.href = `minecraft:?server=${ipBox.value}`;
+    }
+}
+
+// Utility functions to detect the platform
+const isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.iOS());
+    }
+};
