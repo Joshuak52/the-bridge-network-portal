@@ -38,7 +38,7 @@ function copyAndLaunch() {
     document.execCommand("copy");
     alert("Server IP copied to clipboard!");
 
-    window.location.href = `minecraft:?server=${ipBox.value}`;
+    window.location.href = `minecraftpe:?server=${ipBox.value}`;
 }
 
 
