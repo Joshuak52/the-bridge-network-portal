@@ -19,9 +19,13 @@ for (let i = 0; i < 250; i++) {
     style.innerHTML = keyframes;
     document.head.appendChild(style);
 
-    dot.style.left = `${Math.random() * 100}vw`;
-    dot.style.top = `${Math.random() * 100}vh`;
-    dot.style.animation = `${animationName} 2.5s infinite alternate`; // Apply animation
+    // Adjust the random position to stay within the visible area
+    const left = Math.random() * (window.innerWidth - 10) + 5;
+    const top = Math.random() * (window.innerHeight - 10) + 5;
+
+    dot.style.left = `${left}px`;
+    dot.style.top = `${top}px`;
+    dot.style.animation = `${animationName} 2.5s infinite alternate`;
 
     document.querySelector('.dots').appendChild(dot);
 }
