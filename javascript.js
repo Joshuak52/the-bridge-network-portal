@@ -14,6 +14,8 @@ function copyToClipboard() {
     window.getSelection().removeAllRanges();
 }
 
+document.getElementById("serverIp").addEventListener("click", copyToClipboard);
+
 for (let i = 0; i < 250; i++) {
     const dot = document.createElement('div');
     dot.classList.add('dot');
@@ -47,20 +49,3 @@ for (let i = 0; i < 250; i++) {
 
     document.body.appendChild(dot);
 }
-
-function copyToClipboard() {
-    const ipBox = document.getElementById("serverIp");
-    ipBox.select();
-
-    try {
-        const successful = document.execCommand("copy");
-        const msg = successful ? "Server IP copied to clipboard!" : "Copy failed. Please select the IP manually.";
-        alert(msg);
-    } catch (err) {
-        console.error("Unable to copy to clipboard: ", err);
-    }
-
-    // Clear the selection
-    window.getSelection().removeAllRanges();
-}
-
