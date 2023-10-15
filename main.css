@@ -4,7 +4,9 @@ body {
     font-family: Arial, sans-serif;
     font-size: 100%;
     overflow: hidden;
-    position: relative;
+    position: fixed; /* Fixed position to prevent expansion on mobile devices */
+    width: 100%; /* Ensure full width */
+    height: 100%; /* Ensure full height */
 }
 
 .background {
