@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Server Landing Page</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Simple Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://embed.survcart.com/embed.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://embed.survcart.com/embed.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://embed.survcart.com/embed.css" media="all" onload="this.media='all'">
 </head>
 <body>
-    <div class="background"></div>
-    <div class="container">
-        <img src="images/2b2t_logo.png" alt="Server Logo" class="server-logo">
-        <div class="ip-box">
-            <span class="instruction">Click to copy IP!</span>
-            <input type="text" id="serverIp" value="LifeSteal2b2t.org" readonly>
-        </div>
-        <a href="https://discord.gg/QAjnkncD" target="_blank" class="discord-button">Join our Discord</a>
-    </div>
-    <div class="dots"></div>
-    <script src="javascript.js"></script>
+    <header>
+        <h1>Welcome to My Simple Website</h1>
+    </header>
+    
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>This is a simple website example.</p>
+        </section>
+        
+        <section class="survcart-embed-presenter">
+            <!-- The survcart widget will be placed here -->
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Simple Website</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
