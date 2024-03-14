@@ -1,23 +1,47 @@
-var survcartConfig = {
-    "id": "u4OxzEBKXaxMg3SyCfOw",
-    "companyId": "C3bTb8obBQZpDYiB0wYE",
-    "selectors": [
-        {
-            "configId": "q5fMvqVQZSxLyYStQteo",
-            "id": "7nKjlxlqv9XHdeJeQufD",
-            "ga4_tags": [],
-            "default": true,
-            "workflowId": "IZ6IxuzPNSnDVw0xQlRS",
-            "classes": "survcart-embed-presenter",
-            "tokens": [
-                "Book Now",
-                "Book Now!",
-                "BOOK NOW"
-            ]
-        }
-    ],
-    "embedName": "Embed Configuration 1",
-    "staged": false
-};
+document.addEventListener("DOMContentLoaded", function () {
+    const output = document.getElementById('output');
+    const input = document.getElementById('input');
+    const prompt = document.getElementById('prompt');
+    const introText = `Welcome to Brian's World! Type 'help' to list all available commands.`;
+    let charIndex = 0;
 
-// Additional JavaScript can go here
+    function typeIntroText() {
+        if (charIndex < introText.length) {
+            output.textContent += introText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeIntroText, 5); // Adjust the typing speed (5 ms per character for visibility)
+        }
+    }
+
+    input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const cmd = input.value.trim();
+            input.value = '';
+            output.textContent += '\n' + prompt.textContent + cmd;
+            switch (cmd.toLowerCase()) {
+                case 'help':
+                    output.textContent += '\nCommands: DATE, CONTACT, LOCATION, STORE';
+                    break;
+                case 'date':
+                    const currentDate = new Date();
+                    output.textContent += `\nLocal Date and Time: ${currentDate.toLocaleString()}`;
+                    break;
+                case 'location':
+                    const locations = ['Supercharged', 'Tacos and Tequila', 'Philadelphia', 'Around'];
+                    const currentHour = new Date().getHours();
+                    if (currentHour >= 7 && currentHour < 15) {
+                        output.textContent += '\nBrian is at work';
+                    } else {
+                        const selectedLocation = locations[Math.floor(Math.random() * locations.length)];
+                        output.textContent += `\nLocation: ${selectedLocation}`;
+                    }
+                    break;
+                default:
+                    output.textContent += '\nUnknown command.';
+            }
+        }
+    });
+
+    typeIntroText();
+});
