@@ -54,7 +54,7 @@ let charIndex = 0;
         if (charIndex < introText.length) {
             output.textContent += introText.charAt(charIndex);
             charIndex++;
-            setTimeout(typeIntroText, 0.1); // Adjust the typing speed (0.3 ms per character for visibility)
+            setTimeout(typeIntroText, 0.1 / 3); // Adjust the typing speed (0.3 ms per character for visibility)
         }
     }
         window.addEventListener('click', function() {
