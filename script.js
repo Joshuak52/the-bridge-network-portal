@@ -1,47 +1,28 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const output = document.getElementById('output');
-    const input = document.getElementById('input');
-    const prompt = document.getElementById('prompt');
-    const introText = `Welcome to Brian's World! Type 'help' to list all available commands.`;
-    let charIndex = 0;
+document.addEventListener("DOMContentLoaded", function() {
+  generateParticles(50);
 
-    function typeIntroText() {
-        if (charIndex < introText.length) {
-            output.textContent += introText.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeIntroText, 5); // Adjust the typing speed (5 ms per character for visibility)
-        }
+  const commandInput = document.getElementById("commandInput");
+  commandInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      executeCommand(this.value);
+      this.value = ""; // Clear input after command execution
     }
-
-    input.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const cmd = input.value.trim();
-            input.value = '';
-            output.textContent += '\n' + prompt.textContent + cmd;
-            switch (cmd.toLowerCase()) {
-                case 'help':
-                    output.textContent += '\nCommands: DATE, CONTACT, LOCATION, STORE';
-                    break;
-                case 'date':
-                    const currentDate = new Date();
-                    output.textContent += `\nLocal Date and Time: ${currentDate.toLocaleString()}`;
-                    break;
-                case 'location':
-                    const locations = ['Supercharged', 'Tacos and Tequila', 'Philadelphia', 'Around'];
-                    const currentHour = new Date().getHours();
-                    if (currentHour >= 7 && currentHour < 15) {
-                        output.textContent += '\nBrian is at work';
-                    } else {
-                        const selectedLocation = locations[Math.floor(Math.random() * locations.length)];
-                        output.textContent += `\nLocation: ${selectedLocation}`;
-                    }
-                    break;
-                default:
-                    output.textContent += '\nUnknown command.';
-            }
-        }
-    });
-
-    typeIntroText();
+  });
 });
+
+function generateParticles(num) {
+  const container = document.getElementById("particle-container");
+  for (let i = 0; i < num; i++) {
+    let particle = document.createElement("div");
+    particle.classList.add("particle");
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.left = `${Math.random() * 100}%`;
+    container.appendChild(particle);
+  }
+}
+
+function executeCommand(command) {
+  const output = document.getElementById("output");
+  // For now, just print the command. Later, you can add actual command handling here.
+  output.textContent += `> ${command}\n`;
+}
