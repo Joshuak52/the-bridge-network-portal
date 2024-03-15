@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-  generateParticles(50);
+  generateParticles(500);
 
   const commandInput = document.getElementById("commandInput");
   commandInput.addEventListener("keydown", function(event) {
