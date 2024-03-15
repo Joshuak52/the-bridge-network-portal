@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brian's World</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- MusicKit JS for potential future use with Apple Music API -->
-    <script src="https://js-cdn.music.apple.com/musickit/v1/musickit.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Command Terminal Site</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Embedding the Apple Music playlist -->
-    <iframe allow="autoplay *; encrypted-media *; fullscreen *" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/playlist-for-my-funeral/pl.u-vxy6kjMCPW56lK"></iframe>
-    <div id="output">
-          __     __          __             __                  __     __              ___
-       /\  == \   /\  == \   /\ \   /\   \   /\ "-.\ \   /\  _\      /\ \   \ \   /\   \   /\  == \   /\ \       /\  -.
-       \ \  <   \ \  <   \ \ \  \ \   \  \ \ -.  \  \ _  \     \ \ / ".\ \  \ \ /\ \  \ \  <   \ \ _  \ \ /\ \ 
-        \ _\  \ _\ _\  \ _\  \ _\ _\  \ _\"_\  /_\     \ _/".~_\  \ _\  \ _\ _\  \ _\  \ ___- 
-         /__/   // //   //   ////   // //   /__/      //   //   /__/   // //   /_/   /__/ ⠀
-    </div>
-    <div id="inputLine">
-        <span id="prompt">C:\Users\Guest&gt;</span>
-        <input id="input" autofocus />
-    </div>
-    <script src="script.js"></script>
+
+<div id="particle-container"></div>
+
+<div class="terminal" id="terminal">
+  <div id="output"></div>
+  <input type="text" id="commandInput" autofocus/>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
