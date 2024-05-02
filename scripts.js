@@ -4,14 +4,17 @@ let attempts;
 
 var password = prompt("Please enter the password:");
 
-if (password != null && password === "password") {
+if (password === "password") {
     // If password is correct, display the content
     document.getElementById("content").style.display = "block";
 } else {
-    // If password is incorrect, hide the content
+    // If password is incorrect, or cancel is clicked (password is null), hide the content
     document.getElementById("content").style.display = "none";
-    alert("Incorrect password. Access denied.");
+    alert("Incorrect password or access canceled. Access denied.");
+    // Redirect to another page
+    window.location.href = "https://vrians.world/accessdenied"; // Replace this URL with the one you want to redirect to
 }
+
 function gameListener(cmd) {
     const guess = Number(cmd);
     if (isNaN(guess)) {
@@ -54,24 +57,30 @@ document.addEventListener("DOMContentLoaded", function () {
                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⠿⠿⣿⣿⣿⠇⠀⠀⢀⠀⠀⠀
                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡿⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⡇⠀⠀⢀⣼⠗⠀⠀
                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠃⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠁⠀⠀⠀
-                       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠒⠀⠀⠀⠀⠀⠀⠀⠀
-Type 'help' to list all available commands.
-`;
-    
-let charIndex = 0;
+                       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠒`;
 
-    function typeIntroText() {
-        if (charIndex < introText.length) {
-            output.textContent += introText.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeIntroText, 0.02); // typing speed (0.2 ms per character)
-        }
-    }
-        window.addEventListener('click', function() {
-        document.getElementById('input').focus();
+const helpText = "\nType 'help' to list all available commands."; // Ensure to start with a newline if needed
+
+let charIndex = 0;
+let totalText = introText + helpText; // Concatenate intro and help text
+                   
+function typeIntroText() {
+    if (charIndex < totalText.length) {
+            output.textContent += totalText.charAt(charIndex);
+                charIndex++;
+            setTimeout(typeIntroText, 1.0); // Maintain the same typing speed throughout
+                           }
+                       }
+                       typeIntroText();
+    
+    document.body.addEventListener('click', function(event) {
+    // Prevent focusing the input field if the click was on an input, button, or link
+        if (!['INPUT', 'BUTTON', 'A'].includes(event.target.tagName)) {
+            input.focus();
+                }
     });
     
-    document.getElementById('input').addEventListener('keydown', function(event) {
+    input.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault();
             const cmd = this.value.trim();
