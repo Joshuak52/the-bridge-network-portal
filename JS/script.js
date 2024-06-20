@@ -1,6 +1,6 @@
 // Script regarding players, using MCAPI - https://mcapi.us/
 window.addEventListener('load', function theseFunc() {
-        MinecraftAPI.getServerStatus('s.nerd.nu', {
+        MinecraftAPI.getServerStatus('lifestealsmp.org', {
                 port: 25565
         }, function (err, status) {
                 if (err) {
