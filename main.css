@@ -19,7 +19,7 @@ body::before {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 1.5); /* Adjust the 0.5 value to control the darkness */
+        background: rgba(0, 0, 0, 0.7); /* Adjust the 0.5 value to control the darkness */
         z-index: 1;
         pointer-events: none;
 }
@@ -96,8 +96,8 @@ body > * {
 }
 
 .logoarea img {
-        width: 408px;
-        height: 287px;
+        width: 612px;
+        height: 431px;
         padding-top: 155px;
 }
 
