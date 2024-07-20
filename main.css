@@ -9,6 +9,24 @@ body {
         padding: 0;
         background-image: url('IMG/bck.png');
         background-size: cover;
+        position: relative;
+}
+
+body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Adjust the 0.5 value to control the darkness */
+        z-index: 1;
+        pointer-events: none;
+}
+
+body > * {
+        position: relative;
+        z-index: 2;
 }
 
 ::-webkit-scrollbar {
@@ -22,7 +40,6 @@ body {
 ::-webkit-scrollbar-thumb {
         background: rgba(39, 189, 39, 0.286);
 }
-
 
 /* NAVBAR */
 .navbar {
