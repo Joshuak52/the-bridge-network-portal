@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PvP Rankings - The Bridge Network</title>
+    <meta name="description" content="PvP Rankings of The Bridge Network - Java & Bedrock Cross-Play Minecraft Server">
+    <meta name="keywords" content="rankings,pvp,leaderboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="./img/favicon.png" />
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page">
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.imgur.com/9xGkMd2.png" alt="MyServer logo">
+            </div>
+
+            <div class="items">
+                <a href="index.html" class="item home">
+                    <div>
+                        <p class="title">Home</p>
+                    </div>
+                </a>
+                <a href="vote.html" class="item vote">
+                    <div>
+                        <p class="title">Vote</p>
+                    </div>
+                </a>
+                <a href="rankings.html" class="item rankings">
+                    <div>
+                        <p class="title">PvP Rankings</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="content">
+                <h1>PvP Rankings</h1>
+                <div id="rankings"></div>
+            </div>
+
+            <div class="playercount">
+                <p>Join the server with <span class="ip">thebridgemc.net</span></p>
+            </div>
+
+            <div class="copyright">
+                <p><center>
+                    © 2024 <b>The Bridge Network</b> All Rights Reserved.
+                </p></center>
+                <a id="tm" href="https://brildes.com" target="_blank" alt="John @ Brildes.com"></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fetch rankings from the backend
+        fetch('get_rankings.php')
+            .then(response => response.json())
+            .then(data => {
+                const rankingsDiv = document.getElementById('rankings');
+                data.forEach((player, index) => {
+                    const playerDiv = document.createElement('div');
+                    playerDiv.classList.add('player');
+
+                    const avatar = document.createElement('img');
+                    avatar.src = `https://mc-heads.net/avatar/${player.username}/64`;
+                    avatar.alt = `${player.username}'s avatar`;
+
+                    const username = document.createElement('span');
+                    username.textContent = `${index + 1}. ${player.username} - ${player.score}`;
+
+                    playerDiv.appendChild(avatar);
+                    playerDiv.appendChild(username);
+                    rankingsDiv.appendChild(playerDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching rankings:', error));
+    </script>
+</body>
+</html>
